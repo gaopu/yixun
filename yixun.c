@@ -4,6 +4,8 @@
 //    Shiningacg/XDU 
 // lyerpal@126.com
 // hi.baidu.com/lyer
+//lyer does the major work,be surprised to his great work!
+//Now the android port is released,gunterwei@gmail.com
 
 //Apr 14,2012
 //Apr 16,2012
@@ -11,6 +13,7 @@
 
 #include <time.h>
 #include "md5lib.h"
+#include <stdio.h>
 //typedef long int __int64 ;
 int bswap(int v1)
 {
@@ -101,7 +104,7 @@ void main(int argc,char *argv[])
 	char hashmodel[31];
 	char username[15];
 	unsigned char hash;
-	int tim=time(&tim);
+	time_t tim=time(&tim);
 	int a,b,c;
 	a=enc1(tim);
   c=a;
@@ -117,12 +120,22 @@ void main(int argc,char *argv[])
 //	__asm int 3;
 	hash=MD5DAT(hashmodel,31);
 	enc3(&b,buf);
-
-
-	printf("%s%02x%s",buf,hash,argv[1]);
-//	return "%s%02x%s",buf,hash,username;		
-/////////////////////////////////////////////////////////////
-//  char usernameout[25];
-//	sprintf(usernameout,"\r\n%s%02x%s",buf,hash,username);	
-/////////////////////////////////////////////////////////////  
+// printf("%s%02x%s\n",buf,hash,argv[1]);
+char x;
+int i;
+for (i = 0; i < 6; i++) {
+	x = buf[i];
+	printf("%s%2x","%",(int)x);
+}
+char s[2];
+sprintf(s,"%02x",hash);
+for (i=0; i < 2; i++) {
+	x=s[i];
+	printf("%s%2x","%",(int)x);
+}
+for (i=0; i < 11; i++){
+	x=argv[1][i];
+	printf("%s%2x","%",(int)x);
+}
+return 0;
 }
